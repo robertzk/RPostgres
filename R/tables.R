@@ -94,7 +94,13 @@ setMethod("dbWriteTable", c("PqConnection", "character", "data.frame"),
 #' @inheritParams DBI::rownamesToColumn
 #' @rdname postgres-tables
 setMethod("sqlData", "PqConnection", function(con, value, row.names = NA, copy = TRUE) {
-  value <- rownamesToColumn(value, row.names)
+  if (existsFunction("sqlRownamesToColumn", where = getNamespace("DBI"))) {
+    value <- getFromNamespace("sqlRownamesToColumn", "DBI")(value, row.names)
+  } else if (existsFunction("rownamesToColumn", where = getNamespace("DBI"))) {
+    value <- getFromNamespace("rownamesToColumn", "DBI")(value, row.names)
+  } else {
+    stop("Unexpected DBI error: ensure sqlRownamesToColumn or rownamesToColumn exists.")
+  }
 
   # C code takes care of atomic vectors, just need to coerce objects
   is_object <- vapply(value, is.object, logical(1))

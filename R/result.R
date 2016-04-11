@@ -102,9 +102,11 @@ setMethod("dbSendQuery", "PqConnection", function(conn, statement, params = NULL
 setMethod("dbFetch", "PqResult", function(res, n = -1, ..., row.names = NA) {
   # Due to unannounced RPostgres changes: https://github.com/rstats-db/RPostgres/commit/67d4c53e78f1ba32378da122a3dca3fcdae27cab
   if (existsFunction("sqlColumnToRownames", where = getNamespace("DBI"))) {
-    DBI::sqlColumnToRownames(result_fetch(res@ptr, n = n), row.names)
+    getFromNamespace("sqlColumnToRownames", "DBI")(result_fetch(res@ptr, n = n), row.names)
+  } else if (existsFunction("columnToRownames", where = getNamespace("DBI"))) {
+    getFromNamespace("columnToRownames", "DBI")(result_fetch(res@ptr, n = n), row.names)
   } else {
-    DBI::columnToRownames(result_fetch(res@ptr, n = n), row.names)
+    stop("Unexpected DBI error: ensure columnToRownames or sqlColumnToRownames exists.")
   }
 })
 
