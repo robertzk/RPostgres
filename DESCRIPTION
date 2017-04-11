@@ -19,11 +19,11 @@ LinkingTo: Rcpp,
     BH
 Imports:
     methods,
-    dbtest (>= 0.0.0.9006),
     Rcpp (>= 0.11.4.2),
     DBI (>= 0.3.1.9008)
 Suggests:
-    testthat
+    testthat,
+    dbtest (>= 0.0.0.9006)
 Remotes:
     avantcredit/dbtest@0.0.2.9002
 Collate:

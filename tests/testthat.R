@@ -1,5 +1,5 @@
 library(testthat)
 library(RPostgres)
-library(DBI)
+library(dbtest)
 
 test_check("RPostgres")

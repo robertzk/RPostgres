@@ -6,7 +6,7 @@
 #' @export
 #' @useDynLib RPostgres
 #' @importFrom Rcpp evalCpp
-#' @import methods DBI dbtest
+#' @import methods DBI
 #' @examples
 #' library(DBI)
 #' RPostgres::Postgres()
