@@ -6,7 +6,7 @@
 #' @export
 #' @useDynLib RPostgres
 #' @importFrom Rcpp evalCpp
-#' @import methods DBI
+#' @import methods DBI dbtest
 #' @examples
 #' library(DBI)
 #' RPostgres::Postgres()
@@ -25,4 +25,3 @@ setClass("PqDriver", contains = "DBIDriver")
 setMethod("dbUnloadDriver", "PqDriver", function(drv, ...) {
   NULL
 })
-

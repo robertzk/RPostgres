@@ -156,6 +156,8 @@ public:
     const char* dbnm = PQdb(pConn_);
     const char* host = PQhost(pConn_);
     const char* port = PQport(pConn_);
+    const char* user = PQuser(pConn_);
+    const char* pass = PQpass(pConn_);
     int pver = PQprotocolVersion(pConn_);
     int sver = PQserverVersion(pConn_);
 
@@ -163,6 +165,8 @@ public:
       Rcpp::_["dbname"] = dbnm == NULL ? "" : std::string(dbnm),
       Rcpp::_["host"]   = host == NULL ? "" : std::string(host),
       Rcpp::_["port"]   = port == NULL ? "" : std::string(port),
+      Rcpp::_["user"]   = user == NULL ? "" : std::string(user),
+      Rcpp::_["pass"]   = pass == NULL ? "" : std::string(pass),
       Rcpp::_["protocol_version"]   = pver,
       Rcpp::_["server_version"]     = sver
     );
